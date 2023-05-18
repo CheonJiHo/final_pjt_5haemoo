@@ -2,8 +2,6 @@ qwdwqdwdqwdqwd
 
 # Final-Pjt-5haemoo
 
----
-
 # 1. 프로젝트 소개
 
 ## 영화 정보 사이트 구현
@@ -62,10 +60,8 @@ qwdwqdwdqwdqwd
 
 # 과정
 
----
+
 
 ## ERD
 
 ![](README_assets/06257423878d52bf51ed6dd9298f9d7f9e60de05.png)
-
----
