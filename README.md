@@ -60,8 +60,6 @@ qwdwqdwdqwdqwd
 
 # 과정
 
-
-
 ## ERD
 
 ![](README_assets/06257423878d52bf51ed6dd9298f9d7f9e60de05.png)
