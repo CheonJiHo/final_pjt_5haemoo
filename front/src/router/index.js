@@ -5,10 +5,17 @@ import SignUpView from '@/views/SignUpView'
 import LogInView from '@/views/LogInView'
 import MoviesView from '@/views/MoviesView'
 import RandomView from '@/views/RandomView'
-
+import HomeView from '@/views/HomeView'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+  },
+  
+  
   {
     path: '/moviecreate',
     name: 'moviecreateView',

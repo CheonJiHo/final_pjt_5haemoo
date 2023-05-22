@@ -1,15 +1,33 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link :to="{ name: 'SignUpView' }">SignUpPage</router-link> | 
-      <router-link :to="{ name: 'LogInView' }">LogInPage</router-link>  |
-      
-      <router-link :to="{name:'MoviesView'}">Movies</router-link>   |
-      <router-link :to="{name:'RandomView'}">Random</router-link> 
-
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+      <div class="container">
+        <router-link :to="{name: 'home'}" class="navbar-brand"><img src="@/assets/byeongjin.jpg" alt="병진이" class="rounded" ></router-link>
+        <router-link :to="{name: 'home'}" class="navbar-brand">오태식의 해바라기 무비</router-link>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'SignUpView' }" data-toggle="collapse" data-target=".navbar-collapse.show" :active-class="'active'">SignUpPage</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'LogInView' }" data-toggle="collapse" data-target=".navbar-collapse.show" :active-class="'active'">LogInPage</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'MoviesView' }" data-toggle="collapse" data-target=".navbar-collapse.show" :active-class="'active'">Movies</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'RandomView' }" data-toggle="collapse" data-target=".navbar-collapse.show" :active-class="'active'">Random</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-    <br>
-    <router-view/>
+    
+    <router-view class="p-0"/>
   </div>
 </template>
 
@@ -20,23 +38,29 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: black;
+  ;
 }
 
 nav {
   padding: 30px;
+  background-color: #2c3e50;
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: whitesmoke;
 }
 
-nav a.router-link-exact-active {
+nav a.active {
   color: #42b983;
 }
-nav img {
-  width: 30px;
-  height: 50px;
 
+nav img {
+  width: 40px;
+  height: 40px;
+  border-radius: 70%;
+  margin-right: 10px;
 }
+
 </style>
