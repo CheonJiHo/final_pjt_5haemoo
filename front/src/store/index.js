@@ -48,12 +48,12 @@ export default new Vuex.Store({
       const username = payload.username
       const password1 = payload.password1
       const password2 = payload.password2
-      const selectedGenres = payload.selectedGenres
+
       axios({
         method: 'post',
         url: `${API_URL}/accounts/signup/`,
         data: {
-          username, password1, password2, selectedGenres
+          username, password1, password2
         }
       })
         .then((res) => {
@@ -85,7 +85,10 @@ export default new Vuex.Store({
     getCard(context){
       axios({
         method:'get',
-        url:"http://127.0.0.1:8000/api/v1/movies/"
+        url:"http://127.0.0.1:8000/api/v1/movies/",
+        headers:{
+          Authorization:`Token ${context.state.token}`
+        }
       })
         .then((res) => {
           console.log(res.data)
