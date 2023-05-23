@@ -1,33 +1,86 @@
 <template>
-  <div>
-    <h1>Sign Up Page</h1>
+  <!-- <div class="signup-page">
+  <div class="container">
+    <div class="input-form-backgroud row">
+    <h1>회원 가입 페이지</h1>
     <form @submit.prevent="signUp">
-      <label for="username"> username : </label>
-      <input type="text" id="username" v-model="username"><br>
-
-      <label for="password1"> password : </label>
-      <input type="password" id="password1" v-model="password1"><br>
-
-      <label for="password2"> password confirmation : </label>
-      <input type="password" id="password2" v-model="password2">
-      <br>
-      <label>선호하는 장르 | {{ selectedGenres.length }}/3</label>
-      <div class="row">
-        <div v-for="genre in genres" :key="genre.id" class="col-md-3">
-          <label class="checkbox-label">
-            <input type="radio" :value="genre.id" v-model="selectedGenres" @change="checkGenreLimit(genre.id)">
-            {{ genre.name }}
-          </label>
-        </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">사용자명:</label>
+        <input type="text" id="username" v-model="username" class="form-control">
       </div>
 
-      <input type="submit" value="SignUp">
+      <div class="mb-3">
+        <label for="password1" class="form-label">비밀번호:</label>
+        <input type="password" id="password1" v-model="password1" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label for="password2" class="form-label">비밀번호 확인:</label>
+        <input type="password" id="password2" v-model="password2" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary">가입하기</button>
     </form>
+  </div>
+  </div>
+  </div> -->
+  <div class="login ">
+    <!-- <form @submit.prevent="login">
+      <label for="username">username : </label>
+      <input type="text" id="username" v-model="username"><br>
+
+      <label for="password"> password : </label>
+      <input type="password" id="password" v-model="password"><br>
+
+      <input type="submit" value="logIn">
+    </form> -->
+    <!--  -->
+  
+
+  <div class="container col-xl-10 col-xxl-8 px-4 py-5 ">
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-lg-6 text-center text-lg-start">
+        <img class="col-lg-10 img1" src="@/assets/hyungnim.jpg" alt="오태식">
+        <h2 class="text-white display-4 fw-bold lh-1 mb-3">회원가입</h2>
+        <p class="text-white col-lg-10 fs-4">이건 기회야...</p>
+        <p class="text-white col-lg-10 fs-4">회원가입을 해서 형님들에게</p>
+        <p class="text-white col-lg-10 fs-4">깊은 인상을 남겨줄거야...</p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-6">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" @submit.prevent="signUp">
+          
+          <div class="form-floating mb-3">
+            
+            <input type="text" id="username" v-model="username" class="form-control">
+            <label for="floatingInput">ID</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input v-model="password1" type="password" class="form-control" id="floatingPassword" >
+            <label for="floatingPassword">비밀번호</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input v-model="password2" type="password" class="form-control" id="floatingPassword" >
+            <label for="floatingPassword">비밀번호 확인</label>
+          </div>
+          <!-- <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div> -->
+          <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
+          <hr class="my-4">
+          <small class="text-muted">희주 얼굴 그렇게 만든 놈 누구냐</small>
+          <br>
+          <small class="text-muted">양식 다 맞춰서 회원가입해라</small>
+        </form>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+
 
 export default {
   name: 'SignUpView',
@@ -36,8 +89,7 @@ export default {
       username: null,
       password1: null,
       password2: null,
-      genres: [],              // 장르 목록
-      selectedGenres: [],      // 선택한 장르 ID 배열
+      
     }
   },
   methods: {
@@ -46,10 +98,10 @@ export default {
       const username = this.username
       const password1 = this.password1
       const password2 = this.password2
-      const selectedGenres = this.selectedGenres
+    
 
       const payload = {
-        username, password1, password2, selectedGenres
+        username, password1, password2, 
       }
       // if (this.selectedGenres.length != 3) {
       //   alert('3개의 장르를 선택해야 합니다.')
@@ -58,18 +110,7 @@ export default {
       
       this.$store.dispatch('signUp', payload)
     },
-    fetchGenres() {
-      // 장르 목록을 받아오는 API를 호출하여 genres 데이터를 설정하는 메서드
-      axios.get('http://127.0.0.1:8000/api/v1/movies/genres/')
-        .then(response => {
-          console.log(response.data)
-          this.genres = response.data;
-        })
-        .catch(err => {
-          console.log(err)
-          // 에러 처리
-        }); 
-    },
+    
     // checkGenreLimit(genreId) {
     //   if (this.selectedGenres.length > 3) {
     //     const index = this.selectedGenres.indexOf(genreId);
@@ -82,17 +123,32 @@ export default {
     // },
   },
   mounted() {
-    this.fetchGenres(); // 컴포넌트가 마운트되면 장르 목록을 가져옴
+    
   }
   }
 
 </script>
 
 <style>
-.checkbox-label {
-  display: inline-block;
-  margin-right: 10px;
+    .signup-page {
+  background-image: url(@/assets/mrsun.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
+    .input-form {
+      max-width: 680px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
 
 </style>

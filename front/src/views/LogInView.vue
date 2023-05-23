@@ -36,7 +36,9 @@
           </div> -->
           <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
           <hr class="my-4">
-          <small class="text-muted">태식아 아이디랑 비밀번호를 누르고 로그인 눌러라</small>
+          <small class="text-muted">태식아 아이디랑 비밀번호를 누르고</small>
+          <br>
+          <small class="text-muted">로그인 눌러라</small>
         </form>
       </div>
     </div>
@@ -71,7 +73,7 @@ export default {
 
 <style>
 .login{
-  height:500px;
+  height:80vh;
 }
 .img1{
   margin-bottom: 30px;
