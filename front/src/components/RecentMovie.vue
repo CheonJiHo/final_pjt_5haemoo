@@ -33,13 +33,15 @@ export default {
 .movie-card {
   background-color: #f7f7f7;
   border-radius: 8px;
-  padding: 20px;
+  padding: 0;
   text-align: center;
+  height: 200px;
+  width:  160px;
 }
 
 .movie-image {
   width: 100%;
-  max-height: 300px;
+  /* max-height: 300px; */
   object-fit: cover;
   border-radius: 8px;
 }

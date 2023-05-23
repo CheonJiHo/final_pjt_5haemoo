@@ -53,7 +53,7 @@
   <div class="swiper-container">
     <swiper :options="swiperOptions" ref="swiper">
       
-        <swiper-slide  v-for="(movie, idx) in movies" :key="idx">
+        <swiper-slide  v-for="(movie, idx) in recentMovies" :key="idx">
           <RecentMovie :movie="movie" />
         </swiper-slide>
       
@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import RecentMovie from '@/components/RecentMovie.vue';
 import { swiper, swiperSlide } from 'swiper';
 
@@ -124,23 +124,15 @@ export default {
     };
   },
   created() {
-    this.fetchMovies();
-  },
-  methods: {
-    fetchMovies() {
-      // TMDB API를 호출하여 최신 영화 목록을 가져오는 메서드
-      const apiKey = 'YOUR_TMDB_API_KEY';
-      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`;
+    this.$store.dispatch('getRecentMovies');
 
-      axios.get(url)
-        .then(response => {
-          this.movies = response.data.results;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
   },
+  computed:{
+    recentMovies(){
+      return this.$store.state.recentMovies
+    }
+  }
+ 
 };
 
 </script>

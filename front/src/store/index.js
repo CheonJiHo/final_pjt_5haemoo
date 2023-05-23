@@ -20,6 +20,7 @@ export default new Vuex.Store({
     token: null,
     // now
     Movies:[],
+    recentMovies:[],
   },
   getters: {
     isLogin(state) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
       state.Movies = resdata
       console.log(resdata)
     },
+    GET_RECENT(state, recent){
+      state.recentMovies = recent
+    }
   },
   actions: {
     signUp(context, payload) {
@@ -95,6 +99,27 @@ export default new Vuex.Store({
         .catch(() =>{
           alert('에러떴다')
         })
+    },
+    getRecentMovies(context){
+      const API_KEY= "e61e2e3c124b0718f734281454239f47"
+      const API_URL = `https://api.themoviedb.org/3/movie/now_playing`
+      axios.get(API_URL, {
+        params: {
+          api_key: API_KEY,
+          language: "ko-KR",
+          page: 1,
+        }
+      })
+      .then(res => {
+        // 응답 데이터를 처리합니다.
+        // const recentMovies = response.data.results;
+        console.log(res.data.results);
+        context.commit('GET_RECENT', res.data.results)
+      })
+      .catch(error => {
+        // 오류를 처리합니다.
+        console.error(error);
+      });
     }
   },
   modules: {
