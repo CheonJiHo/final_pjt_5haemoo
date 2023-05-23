@@ -18,8 +18,10 @@ export default new Vuex.Store({
     articles: [
     ],
     token: null,
-    // now
     Movies:[],
+    //
+    genres: [],
+    randomMovie: null,
   },
   getters: {
     isLogin(state) {
@@ -29,7 +31,10 @@ export default new Vuex.Store({
       return state.Movies.toSorted((a, b) => {
         return b.vote_average - a.vote_average
       })
-    }
+    },
+    getRandomMovie(state) {
+      return state.randomMovie;
+    },
   },
   mutations: {
     // signup & login -> 완료하면 토큰 발급
@@ -41,6 +46,15 @@ export default new Vuex.Store({
     GET_CARD(state, resdata){
       state.Movies = resdata
       console.log(resdata)
+    },
+    LOGOUT(state) {
+      state.token = null;
+    },
+    SET_GENRES(state, genres) {
+      state.genres = genres
+    },
+    SET_RANDOM_MOVIE(state, movie) {
+      state.randomMovie = movie
     },
   },
   actions: {
@@ -81,6 +95,11 @@ export default new Vuex.Store({
         })
       .catch((err) => console.log(err))
     },
+    logout(context) {
+      context.commit('LOGOUT');
+      // 로그아웃 후 로그인 페이지로 이동하거나 다른 필요한 동작을 수행할 수 있습니다.
+      router.push({ name: 'LogInView' });
+    },
     //
     getCard(context){
       axios({
@@ -98,7 +117,27 @@ export default new Vuex.Store({
         .catch(() =>{
           alert('에러떴다')
         })
-    }
+    },
+    fetchGenres({ commit }) {
+      axios.get(`${API_URL}/api/v1/movies/genres/`)
+        .then((res) => {
+          commit('SET_GENRES', res.data)
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    },
+    getRandomMovie({ commit, state }, genreId = null) {
+      let filteredMovies = state.Movies
+
+      if (genreId) {
+        filteredMovies = filteredMovies.filter((movie) => movie.genres.includes(genreId))
+      }
+
+      const randomIndex = Math.floor(Math.random() * filteredMovies.length)
+      const randomMovie = filteredMovies[randomIndex]
+      commit('SET_RANDOM_MOVIE', randomMovie)
+    },
   },
   modules: {
   }

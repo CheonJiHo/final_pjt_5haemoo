@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import moviecreateView from '@/views/moviecreateView'
 import SignUpView from '@/views/SignUpView'
 import LogInView from '@/views/LogInView'
 import MoviesView from '@/views/MoviesView'
@@ -9,12 +8,6 @@ import DetailView from '@/views/DetailView'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/moviecreate',
-    name: 'moviecreateView',
-    component: moviecreateView
-  },
-
   {
     path: '/signup',
     name: 'SignUpView',
@@ -37,7 +30,7 @@ const routes = [
     component:RandomView
   },
   {
-    path: '/:id',
+    path: '/movies/:id',
     name: 'DetailView',
     component: DetailView,
   },

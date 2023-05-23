@@ -2,10 +2,13 @@
   <div>
     <div class="container d-flex">
         <div class="row justify-content-center">
-        <MovieCard class="mb-5 col-xs-12 col-md-6 col-lg-4 col-xl-3"
-        v-for="movie in movies" :key="movie.id" 
-        :movie="movie"
-        />
+          <MovieCard
+            class="mb-5 col-xs-12 col-md-6 col-lg-4 col-xl-3"
+            v-for="movie in movies"
+            :key="movie.id" 
+            :movie="movie"
+            @click="openModal(movie)"
+          />
         </div>
     </div>
   </div>

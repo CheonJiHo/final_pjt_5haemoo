@@ -46,22 +46,6 @@ def movie_list(request):
         
 
 
-# # TMDB API 키
-# API_KEY = 'e8a979cfe459982651dedf077569ac57'
-
-# # Django 서버 URL
-# SERVER_URL = 'http://127.0.0.1:8000/'
-
-# # TMDB에서 영화 데이터 가져오기
-# def fetch_movies():
-#     url = f'https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}'
-#     response = requests.get(url)
-#     if response.status_code == 200:
-#         movies = response.json().get('results')
-#         return movies
-#     else:
-#         print('Error fetching movies:', response.status_code)
-#         return None
 
 # # 장르 정보 가져오기
 def get_genre(genre_ids):
@@ -76,35 +60,3 @@ def genres_list(request):
         genres = get_list_or_404(Genre)
         serializer = GenreListSerializer(genres, many=True)
         return Response(serializer.data)
-
-
-# # 영화 데이터를 Django 서버에 저장하기
-# def save_movies_to_server(movies):
-#     for movie in movies:
-#         # 장르 정보 가져오기
-#         genre_ids = movie['genre_ids']
-#         genres = get_genre(genre_ids)
-
-#         # Movie 모델에 데이터 저장
-#         movie_obj = Movie()
-#         movie_obj.title = movie['title']
-#         movie_obj.release_date = movie['release_date']
-#         movie_obj.vote_average = movie['vote_average']
-#         movie_obj.overview = movie['overview']
-#         # 필요한 영화 정보를 추가로 입력하세요
-
-#         # ManyToMany 필드에 장르 추가
-#         movie_obj.save()
-#         movie_obj.genres.set(genres)
-
-#         print(f'Movie "{movie["title"]}" saved to server.')
-
-
-# # 메인 함수: 영화 데이터 가져오기 및 서버에 저장하기
-# def main():
-#     movies = fetch_movies()
-#     if movies:
-#         save_movies_to_server(movies)
-
-# main()
-

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-
+from reviews.serializers import ReviewSerializer
 from .models import  Genre, Movie
 
 
@@ -18,7 +18,6 @@ class GenreListSerializer(serializers.ModelSerializer):
 class MovieDetailSerializer(serializers.ModelSerializer):
 
 
-
     class GenreListSerializer(serializers.ModelSerializer):
         class Meta:
             model = Genre
@@ -30,6 +29,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
             fields = '__all__' 
 
     
+    review_set = ReviewSerializer(many=True, read_only=True)
     genres = GenreListSerializer(many=True, read_only=True)
     like_users = UserSerializer(many=True, read_only=True)
 
@@ -40,7 +40,6 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     
 
 
-# poster_path, title, release_date, vote_average
 class MovieListSerializer(serializers.ModelSerializer):
 
     class UserSerializer(serializers.ModelSerializer):
