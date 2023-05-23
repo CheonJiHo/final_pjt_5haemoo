@@ -29,7 +29,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
             fields = '__all__' 
 
     
-    review_set = ReviewSerializer(many=True, read_only=True)
+    # review_set = ReviewSerializer(many=True, read_only=True)
     genres = GenreListSerializer(many=True, read_only=True)
     like_users = UserSerializer(many=True, read_only=True)
 
